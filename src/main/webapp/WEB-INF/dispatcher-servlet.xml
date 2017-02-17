@@ -43,5 +43,11 @@
     <bean name="indexController"
           class="org.springframework.web.servlet.mvc.ParameterizableViewController"
           p:viewName="index" />-->
+          <mvc:interceptors>
+              <mvc:interceptor>
+                  <mvc:mapping path="/check-user" />
+                  <bean class="com.mixey.springmvc.interceptor.AdminIntercepotor" />
+              </mvc:interceptor>
+          </mvc:interceptors>
 
 </beans>

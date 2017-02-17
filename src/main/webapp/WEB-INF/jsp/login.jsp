@@ -17,12 +17,18 @@
 	<fieldset class="boxBody">
             <label>Name</label>
             <form:input path="name" />
+            <form:errors cssClass="error" path="name" />
             <label><a href="#" class="rLink" tabindex="5">Forget your password?</a>Password</label>
             <form:input path="password" />
+            <form:errors cssClass="error" path="password" />
 	</fieldset>
 	<footer>
 	  <label><input type="checkbox" tabindex="3">Keep me logged in</label>
-	  <input type="submit" class="btnLogin" value="Login" tabindex="4">
+          
+          <br>
+          <label>Admin</label>
+          <form:checkbox path="admin" />
+          <input type="submit" class="btnLogin" value="Login" tabindex="4">
 	</footer>
     </form:form>
 <footer id="main">
