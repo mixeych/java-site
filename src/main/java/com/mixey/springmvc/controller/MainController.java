@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@SessionAttributes("user")
 public class MainController {
     @RequestMapping("/")
     public ModelAndView hello(){
@@ -21,21 +23,25 @@ public class MainController {
         return new ModelAndView("index", "message", message);
     }
     
+    
     @RequestMapping(path = "/login", method = RequestMethod.GET)
-    public ModelAndView login(){
-        return new ModelAndView("login", "user", new User());
+    public ModelAndView login(Model model){
+        model.addAttribute("user", new User());
+        return new ModelAndView("login");
     }
     
     @RequestMapping(path = "/check-user", method = RequestMethod.POST)
     public String checkUser(@Valid @ModelAttribute User user, BindingResult result, Model model){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("user", user);
-//        modelAndView.setViewName("check-user");
+
         if (result.hasErrors()) {
             return "login";
         }
-        model.addAttribute("user", user);
-        return "check-user";
+        return "redirect:/hello-page";
+    }
+    
+    @RequestMapping(path="/hello-page", method = RequestMethod.GET)
+    public String helloPage(User user){
+        return "hello";
     }
     
     @RequestMapping(path="/get-json-user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
