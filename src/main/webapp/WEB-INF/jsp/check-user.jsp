@@ -14,5 +14,8 @@
     <body>
         <h1>HI!</h1>
         <p>Name: ${user.name}, Password: ${user.password}, isAdmin ${user.admin}</p>
+        
+        
+        
     </body>
 </html>
