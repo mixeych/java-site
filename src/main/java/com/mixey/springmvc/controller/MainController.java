@@ -67,15 +67,22 @@ public class MainController {
 //        }
             
         String fileName = "";
-
+        boolean empt = file.isEmpty();
+        if(empt){
+            redirectAttributes.addFlashAttribute("message", "File is empty");
+            return "redirect:/hello-page";
+        }
         try {
             byte[] bytes = file.getBytes();
-
+            if(bytes.length == 0){
+                redirectAttributes.addFlashAttribute("message", "File is empty");
+                return "redirect:/hello-page";
+            }
             // Creating the directory to store file
             String rootPath = System.getProperty("catalina.home");
             File dir = new File(rootPath + File.separator + "tmpFiles");
             if (!dir.exists())
-                    dir.mkdirs();
+                dir.mkdirs();
 
             // Create the file on server
             File serverFile = new File(dir.getAbsolutePath()
